@@ -140,7 +140,7 @@ def main(code):
     # store the previous observations in replay memory
     replay_buffer = deque()
 
-    env.load(code)
+    env.load(code) ## train이랑 test를 부른다.
 
     with tf.Session() as sess:
         mainDQN = dqn.DQN(sess, input_size, output_size, name="main")
