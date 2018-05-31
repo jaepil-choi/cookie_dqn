@@ -8,5 +8,6 @@ def rmatrix():
         matrix.append(rand)
 
     return matrix
+# 1차원 배열로 해야하지는 않을까?
 
 
