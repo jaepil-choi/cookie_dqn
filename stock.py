@@ -20,6 +20,7 @@ env = gym
 
 # Constants defining our neural network
 input_size = env.input_size
+input_size = env.input_size
 output_size = len(env.action_space)
 
 dis = 0.9
