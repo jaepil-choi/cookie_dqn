@@ -28,43 +28,44 @@ class DQN:
             #layer2 = tf.nn.tanh(tf.matmul(layer1, W2))
             layer2 = tf.nn.relu(tf.matmul(layer1, W2) + b2)
 
-            W3 = tf.get_variable("W3", shape=[h_size, h_size],
+            W3 = tf.get_variable("W3", shape=[h_size, self.output_size], # W3가 마지막이 되었으므로 h_size를 self.output_size로 고침.
                                  initializer=tf.contrib.layers.xavier_initializer())
-            b3 = tf.Variable(tf.random_normal([h_size]))
-            layer3 = tf.nn.relu(tf.matmul(layer2, W3) + b3)
+            b3 = tf.Variable(tf.random_normal([self.output_size]))
+            # layer3 = tf.nn.relu(tf.matmul(layer2, W3) + b3)
 
-            W4 = tf.get_variable("W4", shape=[h_size, h_size],
-                                 initializer=tf.contrib.layers.xavier_initializer())
-            b4 = tf.Variable(tf.random_normal([h_size]))
-            layer4 = tf.nn.relu(tf.matmul(layer3, W4) + b4)
-
-            W5 = tf.get_variable("W5", shape=[h_size, h_size],
-                                 initializer=tf.contrib.layers.xavier_initializer())
-            b5 = tf.Variable(tf.random_normal([h_size]))
-            layer5 = tf.nn.relu(tf.matmul(layer4, W5) + b5)
-
-            W6 = tf.get_variable("W6", shape=[h_size, h_size],
-                                 initializer=tf.contrib.layers.xavier_initializer())
-            b6 = tf.Variable(tf.random_normal([h_size]))
-            layer6 = tf.nn.relu(tf.matmul(layer5, W6) + b6)
-
-            W7 = tf.get_variable("W7", shape=[h_size, h_size],
-                                 initializer=tf.contrib.layers.xavier_initializer())
-            b7 = tf.Variable(tf.random_normal([h_size]))
-            layer7 = tf.nn.relu(tf.matmul(layer6, W7) + b7)
-
-            W8 = tf.get_variable("W8", shape=[h_size, h_size],
-                                 initializer=tf.contrib.layers.xavier_initializer())
-            b8 = tf.Variable(tf.random_normal([h_size]))
-            layer8 = tf.nn.relu(tf.matmul(layer7, W8) + b8)
+            # W4 = tf.get_variable("W4", shape=[h_size, h_size],
+            #                      initializer=tf.contrib.layers.xavier_initializer())
+            # b4 = tf.Variable(tf.random_normal([h_size]))
+            # layer4 = tf.nn.relu(tf.matmul(layer3, W4) + b4)
+            #
+            # W5 = tf.get_variable("W5", shape=[h_size, h_size],
+            #                      initializer=tf.contrib.layers.xavier_initializer())
+            # b5 = tf.Variable(tf.random_normal([h_size]))
+            # layer5 = tf.nn.relu(tf.matmul(layer4, W5) + b5)
+            #
+            # W6 = tf.get_variable("W6", shape=[h_size, h_size],
+            #                      initializer=tf.contrib.layers.xavier_initializer())
+            # b6 = tf.Variable(tf.random_normal([h_size]))
+            # layer6 = tf.nn.relu(tf.matmul(layer5, W6) + b6)
+            #
+            # W7 = tf.get_variable("W7", shape=[h_size, h_size],
+            #                      initializer=tf.contrib.layers.xavier_initializer())
+            # b7 = tf.Variable(tf.random_normal([h_size]))
+            # layer7 = tf.nn.relu(tf.matmul(layer6, W7) + b7)
+            #
+            # W8 = tf.get_variable("W8", shape=[h_size, h_size],
+            #                      initializer=tf.contrib.layers.xavier_initializer())
+            # b8 = tf.Variable(tf.random_normal([h_size]))
+            # layer8 = tf.nn.relu(tf.matmul(layer7, W8) + b8)
 
             # Last layer of Weights
-            W9 = tf.get_variable("W9", shape=[h_size, self.output_size],
-                                 initializer=tf.contrib.layers.xavier_initializer())
-            b9 = tf.Variable(tf.random_normal([self.output_size]))
+            # W9 = tf.get_variable("W9", shape=[h_size, self.output_size],
+            #                      initializer=tf.contrib.layers.xavier_initializer())
+            # b9 = tf.Variable(tf.random_normal([self.output_size]))
 
             # Q prediction
-            self._Qpred = tf.matmul(layer8, W9) + b9
+            # self._Qpred = tf.matmul(layer8, W9) + b9
+            self._Qpred = tf.matmul(layer2, W3) + b3
 
         # We need to define the parts of the network needed for learning a policy
         self._Y = tf.placeholder(shape=[None, self.output_size], dtype=tf.float32)
