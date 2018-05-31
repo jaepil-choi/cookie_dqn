@@ -5,19 +5,22 @@ from sklearn import preprocessing
 
 
 # import하면 곧바로 initialize
-cnx = sqlite3.connect('kospi-201704.sqlite')
+# cnx = sqlite3.connect('kospi-201704.sqlite')
 
 # ratio, amount, ends, foreigner, insti, person, program, credit
-columns = ['ratio', 'amount', 'ends', 'foreigner', 'insti', 'person', 'program', 'credit']
-input_size = len(columns) + 1
+# columns = ['ratio', 'amount', 'ends', 'foreigner', 'insti', 'person', 'program', 'credit']
+# input_size = len(columns) + 1
+input_size = 12*9
 
-# 0: buy
-# 1: sell
+# 0: jump
+# 1: slide
 # 2: do nothing
 action_space = [0, 1, 2]
 
 # training, test set 비율
-TRAIN_DATA_RATIO = 0.8
+# TRAIN_DATA_RATIO = 0.8
+
+###############여기까지 함.
 
 index = 0
 earn = 0 #번돈

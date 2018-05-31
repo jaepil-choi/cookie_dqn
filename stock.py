@@ -13,6 +13,7 @@ from collections import deque
 from dqn import dqn
 
 from my_gym import gym
+from mat_generator import rmatrix
 
 #env = gym.make('CartPole-v2')
 env = gym
