@@ -187,7 +187,7 @@ def main(): ##########code 필요 없어 지움.
             if episode % 10 == 0: # train every 10 episode
                 # Get a random batch of experiences
                 for _ in range(50):
-                    minibatch = random.sample(replay_buffer, 100)
+                    minibatch = random.sample(replay_buffer, 3)
                     loss, _ = ddqn_replay_train(mainDQN, targetDQN, minibatch)
                     #loss, _ = simple_replay_train(mainDQN, minibatch)
 
