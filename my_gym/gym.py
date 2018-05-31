@@ -3,6 +3,7 @@ import numpy as np
 import pandas as pd
 from sklearn import preprocessing
 from mat_generator import rmatrix
+import random
 
 
 # import하면 곧바로 initialize
@@ -150,6 +151,8 @@ def step(action):
     # if earn<-1:
     #     reward = -100
     #     done = True
+
+    done = True if (random.random() < 0.1) else False
 
     return [state, reward, done, None]
 

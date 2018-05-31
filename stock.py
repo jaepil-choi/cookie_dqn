@@ -23,8 +23,8 @@ input_size = env.input_size
 output_size = len(env.action_space)
 
 dis = 0.9
-REPLAY_MEMORY = 50000
-max_episodes = 200
+REPLAY_MEMORY = 50
+max_episodes = 20
 
 def replay_train(mainDQN, targetDQN, train_batch):
     x_stack = np.empty(0).reshape(0, input_size)
@@ -120,7 +120,7 @@ def get_copy_var_ops(*, dest_scope_name="target", src_scope_name="main"):
 def bot_play(mainDQN, isTest=False):
     # See our trained network in action in test env
     state = env.reset(isTest)
-    start = state[2]
+    # start = state[2]
     reward_sum = 0
     while True:
         #env.render()
@@ -131,17 +131,17 @@ def bot_play(mainDQN, isTest=False):
             print("\t{} based profit : {}".format("Test" if isTest else "Train", reward_sum))
             break
 
-    end = state[2]
+    # end = state[2]
     # test 기간 초에 샀다가 마지막에 팔 경우의 점수 (기준점수)...
-    print('\tdefault profit :', end-start)
+    # print('\tdefault profit :', end-start)
 
-def main(code):
-    print("stock code:", code)
+def main(): ##########code 필요 없어 지움.
+    # print("stock code:", code)
 
     # store the previous observations in replay memory
     replay_buffer = deque()
 
-    env.load(code) ## train이랑 test를 부른다.
+    # env.load(code) ## train이랑 test를 부른다.
 
     with tf.Session() as sess:
         mainDQN = dqn.DQN(sess, input_size, output_size, name="main")
@@ -198,10 +198,10 @@ def main(code):
                 # copy q_net -> target_net
                 sess.run(copy_ops)
 
-            if reward_sum>1:
+            if reward_sum>10:
                 break
 
-        print("Rewards:{}, Loss:{}".format(reward_sum, loss))
+        # print("Rewards:{}, Loss:{}".format(reward_sum, loss))
 
         #for i in range(10):
         bot_play(mainDQN, False) # training result
@@ -209,14 +209,13 @@ def main(code):
 
 
 if __name__ == "__main__":
-    codes = gym.getAllCodes()
-    print("Total # of codes:", len(codes))
+    # codes = gym.getAllCodes()
+    # print("Total # of codes:", len(codes))
 
     #main("005930")
 
-    for code in codes:
-        tf.reset_default_graph()
-        main(code)
+    tf.reset_default_graph()
+    main()
 
 
 
