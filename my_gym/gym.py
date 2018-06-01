@@ -1,6 +1,6 @@
 import sqlite3
 import numpy as np
-import pandas as pd
+# import pandas as pd
 from sklearn import preprocessing
 from mat_generator import rmatrix
 import random
@@ -12,7 +12,7 @@ import random
 # ratio, amount, ends, foreigner, insti, person, program, credit
 # columns = ['ratio', 'amount', 'ends', 'foreigner', 'insti', 'person', 'program', 'credit']
 # input_size = len(columns) + 1
-input_size = 12*9
+input_size = 9*12
 
 # 0: jump
 # 1: slide
@@ -139,7 +139,7 @@ def step(action):
     #     state.append( cur[col] )
     # state.append(deposit)
     state = rmatrix()
-    state[0] = [change]*12
+    state = [change]*12*9
 
     # if isTestMode:
     #     print( index, action, reward )

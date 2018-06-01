@@ -66,7 +66,7 @@ def ddqn_replay_train(mainDQN, targetDQN, train_batch):
         if done:
             Q[0, action] = reward
         else:
-            # Double DQN: y = r + gamma * targetDQN(s')[a] where
+            # Double DQN: y = r + gamma * targetDQN(s')[a] whereimpo
             # a = argmax(mainDQN(s'))
             Q[0, action] = reward + dis * targetDQN.predict(next_state)[0, np.argmax(mainDQN.predict(next_state))]
 
@@ -217,6 +217,6 @@ if __name__ == "__main__":
     tf.reset_default_graph()
     main()
 
-
+print("debug")
 
 
