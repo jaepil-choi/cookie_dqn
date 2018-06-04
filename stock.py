@@ -15,7 +15,6 @@ from dqn import dqn
 from my_gym import gym
 from mat_generator import rmatrix
 
-#env = gym.make('CartPole-v2')
 env = gym
 
 # Constants defining our neural network
@@ -57,7 +56,6 @@ def ddqn_replay_train(mainDQN, targetDQN, train_batch):
     '''
     x_stack = np.empty(0).reshape(0, mainDQN.input_size)
     y_stack = np.empty(0).reshape(0, mainDQN.output_size)
-
     # Get stored information from the buffer
     for state, action, reward, next_state, done in train_batch:
         Q = mainDQN.predict(state)
@@ -191,14 +189,13 @@ def main(): ##########code 필요 없어 지움.
                     loss, _ = ddqn_replay_train(mainDQN, targetDQN, minibatch)
                     #loss, _ = simple_replay_train(mainDQN, minibatch)
 
-                #print("Loss: ", loss)
-                #print("Episode: {}, Loss: {}".format(episode, loss))
-                #print("Episode:{}, rewards:{}, loss:{}".format(episode, reward_sum, loss))
+                print("Episode:{}, rewards:{}, loss:{}".format(episode, reward_sum, loss))
 
                 # copy q_net -> target_net
                 sess.run(copy_ops)
 
-            if reward_sum>10:
+            if reward_sum>100:
+                print("reward_sum is bigger than 100:", reward_sum)
                 break
 
         # print("Rewards:{}, Loss:{}".format(reward_sum, loss))
@@ -217,6 +214,5 @@ if __name__ == "__main__":
     tf.reset_default_graph()
     main()
 
-print("debug")
 
 
